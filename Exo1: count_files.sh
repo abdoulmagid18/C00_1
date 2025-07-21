@@ -1,19 +1,18 @@
 #!/bin/bash
 
-dossier=$1
-
-# Vérifier si l'argument est fourni
-if [ -z "$dossier" ]; then
-  echo "Usage: $0 <nom_du_dossier>"
+# Vérifier si un argument (le nom du dossier) est fourni
+if [ -z "$1" ]; then
+  echo "Veuillez spécifier le nom d'un dossier."
   exit 1
 fi
 
 # Vérifier si le dossier existe
-if [ ! -d "$dossier" ]; then
-  echo "Le dossier '$dossier' n'existe pas."
+if [ ! -d "$1" ]; then
+  echo "Le dossier $1 n'existe pas."
   exit 1
 fi
 
-# Compter tous les éléments (fichiers et dossiers, y compris les cachés) sans descendre dans les sous-dossiers
-nb_fichiers=$(find "$dossier" -mindepth 1 -maxdepth 1 | wc -l)
-echo "Le dossier $dossier contient $nb_fichiers élément(s)."
+# Compter les fichiers (non-récursif, sans compter les dossiers)
+nb_files=$(find "$1" -maxdepth 1 -type f | wc -l)
+
+echo "Le dossier $1 contient $nb_files fichier(s)."
