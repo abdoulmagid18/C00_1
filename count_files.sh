@@ -1,18 +1,21 @@
 #!/bin/bash
 
-# Vérifier si un argument (le nom du dossier) est fourni
+# Vérifie si un argument est passé
 if [ -z "$1" ]; then
-  echo "Veuillez spécifier le nom d'un dossier."
+  echo "Usage : $0 nom_du_dossier"
   exit 1
 fi
 
-# Vérifier si le dossier existe
-if [ ! -d "$1" ]; then
-  echo "Le dossier $1 n'existe pas."
+REPERTOIRE="$1"
+
+# Vérifie que le dossier existe
+if [ ! -d "$REPERTOIRE" ]; then
+  echo "Erreur : Le dossier '$REPERTOIRE' n'existe pas."
   exit 1
 fi
 
-# Compter les fichiers (non-récursif, sans compter les dossiers)
-nb_files=$(find "$1" -maxdepth 1 -type f | wc -l)
+# Compte les fichiers en filtrant ls
+NB_FICHIERS=$(ls -p "$REPERTOIRE" | grep -v / | wc -l)
 
-echo "Le dossier $1 contient $nb_files fichier(s)."
+# Affiche le résultat
+echo "Le dossier $REPERTOIRE contient $NB_FICHIERS fichier(s)."
