@@ -1,0 +1,1 @@
+#!/bin/bash# Ce code permet de Chercher une chaîne dans un fichierread -p "Entrez le nom du fichier :" filenameread -p "Entrez le nom du chaine à chercher :" searchif grep -n "$search" "$filename"; then echo "La chaîne '$search' a été trouvée dans $filename." else echo "La chaîne '$search' n'a pas été trouvée dans $filename." fi
